@@ -22,9 +22,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <parent>
-    <groupId>org.jasig.parent</groupId>
-    <artifactId>jasig-parent</artifactId>
-    <version>41</version>
+    <groupId>org.jasig.portlet</groupId>
+    <artifactId>uportal-portlet-parent</artifactId>
+    <version>46</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -101,6 +101,13 @@
           <groupId>commons-logging</groupId>
           <artifactId>commons-logging</artifactId>
         </exclusion>
+        <!-- commons-validator transitively pulls in commons-beanutils which
+             pulls in commons-collections 3.2.2 (CVE-2015-6420, banned by
+             uportal-portlet-parent). -->
+        <exclusion>
+          <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -166,12 +173,7 @@
       <version>1.0</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-      <scope>provided</scope>
-    </dependency>
+    <!-- servlet-api provided at runtime by Tomcat; version managed by uportal-portlet-parent. -->
 
     <dependency>
       <groupId>org.apache.pluto</groupId>
