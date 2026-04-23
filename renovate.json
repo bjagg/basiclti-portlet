@@ -7,6 +7,11 @@
       "matchPackageNames": ["javax.portlet:portlet-api"],
       "allowedVersions": "< 3.0",
       "description": "uPortal runs JSR-286 (Portlet API 2.0). Portlet API 3.x (JSR-362) is incompatible with the container."
+    },
+    {
+      "matchPackageNames": ["org.codehaus.plexus:plexus-archiver"],
+      "allowedVersions": "< 4.11.0",
+      "description": "plexus-archiver 4.11+ requires a newer commons-io (BoundedInputStream.builder()) than the one bundled with maven-war-plugin 3.4.0 (pinned by uportal-portlet-parent). Revisit once the parent bumps maven-war-plugin to 3.5.x+."
     }
   ]
 }
