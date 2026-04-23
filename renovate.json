@@ -1,5 +1,12 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["javax.portlet:portlet-api"],
+      "allowedVersions": "< 3.0",
+      "description": "uPortal runs JSR-286 (Portlet API 2.0). Portlet API 3.x (JSR-362) is incompatible with the container."
+    }
   ]
 }
