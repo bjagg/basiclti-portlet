@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.jasig.portlet</groupId>
     <artifactId>uportal-portlet-parent</artifactId>
-    <version>46</version>
+    <version>47</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -67,11 +67,9 @@
 
   <properties>
     <war.name>${project.artifactId}</war.name>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceVersion>17</project.build.sourceVersion>
-    <project.build.targetVersion>17</project.build.targetVersion>
+    <!-- Override parent's logback 1.3.12; this portlet tracks the logback 1.5.x
+         line to stay current with security fixes (still SLF4J 2.x compatible). -->
     <logbackVersion>1.5.16</logbackVersion>
-    <slf4jVersion>2.0.17</slf4jVersion>
   </properties>
 
   <dependencies>
@@ -80,46 +78,38 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
+      <!-- Override parent's jstl 1.1.2; this portlet uses 1.2. -->
       <version>1.2</version>
     </dependency>
     <dependency>
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
-      <version>1.1.2</version>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
-      <version>2.6</version>
     </dependency>
     <dependency>
       <groupId>commons-validator</groupId>
       <artifactId>commons-validator</artifactId>
       <version>1.9.0</version>
       <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-        <!-- commons-validator transitively pulls in commons-beanutils which
-             pulls in commons-collections 3.2.2 (CVE-2015-6420, banned by
-             uportal-portlet-parent). -->
+        <!-- commons-validator transitively pulls commons-beanutils → commons-collections 3.2.2
+             (CVE-2015-6420, banned by uportal-portlet-parent) and commons-logging 1.x
+             (banned; use jcl-over-slf4j bridge instead). -->
         <exclusion>
           <groupId>commons-collections</groupId>
           <artifactId>commons-collections</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
-      <version>4.5.14</version>
-      <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
@@ -136,27 +126,22 @@
     <dependency>
       <groupId>net.sf.ehcache</groupId>
       <artifactId>ehcache-core</artifactId>
-      <version>2.6.11</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>${slf4jVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
-      <version>${slf4jVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>${slf4jVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-      <version>${slf4jVersion}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -259,75 +244,11 @@
         </configuration>
       </plugin>
 
-      <!-- Javadocs -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.11.2</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <doclint>none</doclint>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- release plugin, special setup for gpg signing -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>3.1.1</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>2.1.0</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <mavenExecutorId>forked-path</mavenExecutorId>
-        </configuration>
-      </plugin>
-
     </plugins>
 
   </build>
 
   <profiles>
-    <!-- release profile to sign the artifacts -->
-    <profile>
-      <id>release-sign-artifacts</id>
-      <activation>
-        <property>
-          <name>performRelease</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>3.2.7</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
     <!-- For generating the Maven site -->
     <profile>
       <id>manual-site</id>
