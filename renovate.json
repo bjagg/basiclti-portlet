@@ -10,8 +10,8 @@
     },
     {
       "matchPackageNames": ["org.codehaus.plexus:plexus-archiver"],
-      "allowedVersions": "< 4.11.0",
-      "description": "plexus-archiver 4.11+ requires a newer commons-io (BoundedInputStream.builder()) than the one bundled with maven-war-plugin 3.4.0 (pinned by uportal-portlet-parent). Revisit once the parent bumps maven-war-plugin to 3.5.x+."
+      "allowedVersions": "< 4.10.0",
+      "description": "plexus-archiver 4.10+ requires a newer commons-io (BoundedInputStream.builder()) than the one bundled with maven-war-plugin 3.4.0 (pinned by uportal-portlet-parent). Verified via CI that 4.10.4 fails the same way 4.11 did. Revisit once the parent bumps maven-war-plugin to 3.5.x+."
     }
   ]
 }
