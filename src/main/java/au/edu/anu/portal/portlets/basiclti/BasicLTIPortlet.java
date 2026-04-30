@@ -274,7 +274,7 @@ public class BasicLTIPortlet extends GenericPortlet{
 		//get prefs and submitted values
 		PortletPreferences prefs = request.getPreferences();
 		String portletHeight = request.getParameter("portletHeight");
-		String portletTitle = StringEscapeUtils.escapeHtml(StringUtils.trim(request.getParameter("portletTitle")));
+		String portletTitle = StringEscapeUtils.escapeHtml4(StringUtils.trim(request.getParameter("portletTitle")));
 		
 		
 		//validate

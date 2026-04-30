@@ -146,8 +146,8 @@ public class HttpSupport {
 		text.append("<div id=\"ltiLaunchFormSubmitArea\">\n");
         text.append("<form action=\""+address+"\" name=\"ltiLaunchForm\" id=\"ltiLaunchForm\" method=\"post\" encType=\"application/x-www-form-urlencoded\">\n" );
         for (Map.Entry<String,String> entry : params.entrySet()) {
-        	String key = StringEscapeUtils.escapeHtml(entry.getKey());
-        	String value = StringEscapeUtils.escapeHtml(entry.getValue());
+        	String key = StringEscapeUtils.escapeHtml4(entry.getKey());
+        	String value = StringEscapeUtils.escapeHtml4(entry.getValue());
 	
         	if ( key.equals(BASICLTI_SUBMIT) ) {
                  text.append("<input type=\"submit\" name=\"");
