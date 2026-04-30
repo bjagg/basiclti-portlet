@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.jasig.portlet</groupId>
     <artifactId>uportal-portlet-parent</artifactId>
-    <version>48</version>
+    <version>49</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -212,31 +212,6 @@
             <version>4.9.2</version>
           </dependency>
         </dependencies>
-      </plugin>
-
-      <!-- License plugin, specific for this portlet -->
-      <plugin>
-        <groupId>com.mycila.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <version>1.9.0</version>
-        <configuration>
-          <basedir>${basedir}</basedir>
-          <header>docs/apache-license-2-template.txt</header>
-          <properties>
-            <year>${project.inceptionYear}-2013</year>
-            <holder>The Australian National University</holder>
-          </properties>
-          <encoding>UTF-8</encoding>
-          <strictCheck>true</strictCheck>
-          <excludes>
-            <exclude>LICENSE</exclude>
-            <exclude>NOTICE</exclude>
-            <exclude>docs/**</exclude>
-            <exclude>**/*.properties</exclude>
-            <exclude>**/*.xml</exclude>
-            <exclude>README.md</exclude>
-          </excludes>
-        </configuration>
       </plugin>
 
     </plugins>
