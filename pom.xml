@@ -205,13 +205,6 @@
             </resource>
           </webResources>
         </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-archiver</artifactId>
-            <version>4.9.2</version>
-          </dependency>
-        </dependencies>
       </plugin>
 
     </plugins>
