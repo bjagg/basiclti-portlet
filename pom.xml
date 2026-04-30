@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.jasig.portlet</groupId>
     <artifactId>uportal-portlet-parent</artifactId>
-    <version>49</version>
+    <version>50</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -205,13 +205,6 @@
             </resource>
           </webResources>
         </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-archiver</artifactId>
-            <version>4.9.2</version>
-          </dependency>
-        </dependencies>
       </plugin>
 
     </plugins>
