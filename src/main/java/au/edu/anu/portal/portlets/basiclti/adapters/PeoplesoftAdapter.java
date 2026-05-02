@@ -20,7 +20,7 @@ package au.edu.anu.portal.portlets.basiclti.adapters;
 
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
